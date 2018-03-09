@@ -6,7 +6,7 @@ router.get('/', function(req, res) {
   res.render('index');
 });
 
-router.get('/:time', function(req,res){
+router.get('/timestamp/:time', function(req,res){
 
     function unixToNatural(unix){
       var date = new Date(unix * 1000);
