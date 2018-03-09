@@ -1,0 +1,31 @@
+{
+  "name": "Timestamp Microservice",
+  "version": "1.0.0",
+  "description": "A FreeCodeCamp project to respond with timestamps when passed a date.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeinnes/freecodecamp.git"
+  },
+  "homepage": "https://github.com/joeinnes/freecodecamp",
+  "bugs": "https://github.com/joeinnes/freecodecamp/issues",
+  "keywords": [
+    "freecodecamp",
+    "microservice",
+    "full stack",
+    "Express",
+    "Node",
+    "API",
+    "timestamp"
+  ],
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Joe Innes",
+  "license": "☺",
+  "dependencies": {
+    "dotenv": "^1.2.0",
+    "express": "^4.12.4",
+    "query-string": "^4.1.0"
+  }
+}
