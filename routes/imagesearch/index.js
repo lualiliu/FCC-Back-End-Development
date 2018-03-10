@@ -4,27 +4,16 @@ var url = require('url');
 var router = express.Router();
 
 
-app.get('/', function(req, res) {
-	qurl = url.parse(req.url, true);
-	qurl.query.date = new Date();
-
-
-	var offset;
-	var config = { url : "http://api.pixplorer.co.uk/image",
-	    qs : {amount : 10, size: "l" }};
-	
-	if (qurl.query.hasOwnProperty('amount'))
-	    config.qs.amount = qurl.query.amount;
-
-	if (qurl.query.hasOwnProperty('word'))
-	    config.qs.word = qurl.query.word;
-
-	request(config, function(error, response, body) {
-	    if (error)
-		throw error;
-
-	    res.send(JSON.parse(body).images);
-	});
+router.get('/:query', function(req, res) {
+	url = "https://cryptic-ridge-9197.herokuapp.com/api/imagesearch/"+req.params.query;
+	console.log(url);
+	request(url, function (error, response, body) {
+	if (!error && response.statusCode == 200) {
+	    var jsonArr = JSON.parse(body);
+	    console.log(jsonArr);
+	  }
+	})
+	res.json(jsonArr);
 });
 
 module.exports = router;
