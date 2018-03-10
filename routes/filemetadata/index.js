@@ -10,15 +10,22 @@ var undone = "<p>Need to upload<p>"   //redirect home-page
 router.get("/",function(req,res){
 	res.sendFile( __dirname + "/" + "index.html" );                                  // render homepage
 });
-router.post("/upload",upload.single('user-file'),function(req,res){
-    //console.log(req.file);
-    res.writeHead(200, {'content-type':'application/json'});
-    var op = {
-        'Name':req.file.originalname,
-        'Size':req.file.size
-    };
-    res.send(JSON.stringify(op));
-});  	
+router.post('/upload', upload.single('ssfile'), function (req, res, next) {
+    //console.log(req);
+    //console.log(req.files['0'].size);
+    
+	if (req.files['0']===undefined){
+		res.send(undone);                                              // if file did not select
+	}
+	
+	res.json({name:req.files['0'].originalFilename,size: req.files['0'].size});        // return json 
+	
+	fs.unlink(req.files['0'].path,function(err){						       // delete uploaded file
+		if (err){return console.log(err)}
+		console.log("Removed!")});
+	
+});
+
 router.get("/upload",function(req,res){                                   // catch get call to "/upload"
 	res.send(undone);                                                  // redirect home-page
 });

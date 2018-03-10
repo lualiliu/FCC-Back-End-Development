@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-
+var multipart = require("connect-multiparty")	
 
 var timestamp = require('./routes/timestamp/index');
 var headerparser = require('./routes/headerparser/index');
@@ -17,6 +17,8 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(multipart({uploadDir:path.join(__dirname, 'uploads' )}));
 
 app.use('/api/timestamp', timestamp);
 app.use('/api/whoami', headerparser);

@@ -3,12 +3,12 @@
 <body>
 	<p>
 		This is a very simple test harness which posts to 
-		<a href="https://cryptic-ridge-9197.herokuapp.com//api/fileanalyse">
-			https://cryptic-ridge-9197.herokuapp.com//api/fileanalyse</a>
+		<a href="http://127.0.0.1:3000/api/filemetadata/upload">
+			http://127.0.0.1:3000/api/filemetadata/upload</a>
 		Take a look at <i>View page source</i> to see how it works.
 	</p>
-	<form id="file-form" enctype="multipart/form-data">
-		<input type="file" name="the-file" />
+	<form id="file-form" enctype="multipart/form-data" action="/upload"  method="POST">
+		<input type="file" name="file" />
 		<input type="submit" value="Upload" />
 	</form>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -40,7 +40,7 @@
 						alert('ERRORS: ' + textStatus);
 					},
 					success: function(data) {
-						alert('FILE SIZE: ' + data.fileSize);
+						alert('FILE SIZE: ' + data.size);
 					}
 				});
 			});
