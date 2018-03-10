@@ -3,7 +3,9 @@ var path = require('path');
 var logger = require('morgan');
 
 
-var index = require('./routes/timestamp/index');
+var timestamp = require('./routes/timestamp/index');
+var headerparser = require('./routes/headerparser/index');
+var shortener = require('./routes/shortener/index');
 
 var app = express();
 
@@ -14,7 +16,9 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/timestamp', index);
+app.use('/api/timestamp', timestamp);
+app.use('/api/whoami', headerparser);
+app.use('/api/shortener', shortener);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
