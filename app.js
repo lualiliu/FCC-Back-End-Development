@@ -7,6 +7,8 @@ var timestamp = require('./routes/timestamp/index');
 var headerparser = require('./routes/headerparser/index');
 var shortener = require('./routes/shortener/index');
 var imagesearch = require('./routes/imagesearch/index');
+var filemetadata = require('./routes/filemetadata/index');
+
 var app = express();
 
 // view engine setup
@@ -20,6 +22,7 @@ app.use('/api/timestamp', timestamp);
 app.use('/api/whoami', headerparser);
 app.use('/api/shortener', shortener);
 app.use('/api/imagesearch', imagesearch);
+app.use('/api/filemetadata', filemetadata);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

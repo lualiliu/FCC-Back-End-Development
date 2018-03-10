@@ -9,11 +9,11 @@ router.get('/', function(req, res) {
 
 router.get('/lastest', function(req, res) {
 	url = "https://cryptic-ridge-9197.herokuapp.com/api/latest/imagesearch/";
-	console.log(url);
+	//console.log(url);
 	request(url, function (error, response, body) {
 	if (!error && response.statusCode == 200) {
 	    var jsonArr = JSON.parse(body);
-	    console.log(jsonArr);
+	    //console.log(jsonArr);
 	    res.json(jsonArr);
 	  }
 	})
@@ -22,11 +22,11 @@ router.get('/lastest', function(req, res) {
 
 router.get('/:query', function(req, res) {
 	url = "https://cryptic-ridge-9197.herokuapp.com/api/imagesearch/"+req.params.query;
-	console.log(url);
+	//console.log(url);
 	request(url, function (error, response, body) {
 	if (!error && response.statusCode == 200) {
 	    var jsonArr = JSON.parse(body);
-	    console.log(jsonArr);
+	    //console.log(jsonArr);
 	    res.json(jsonArr);
 	  }
 	})
