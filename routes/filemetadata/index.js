@@ -17,7 +17,7 @@ router.post("/upload",upload.single('user-file'),function(req,res){
         'Name':req.file.originalname,
         'Size':req.file.size
     };
-    res.end(JSON.stringify(op));
+    res.send(JSON.stringify(op));
 });  	
 router.get("/upload",function(req,res){                                   // catch get call to "/upload"
 	res.send(undone);                                                  // redirect home-page
