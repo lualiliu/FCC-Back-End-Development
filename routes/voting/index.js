@@ -10,7 +10,7 @@ var PORT = process.env.PORT || 8080,
     LocalStrategy = require('passport-local').Strategy,
     bodyparser = require('body-parser'),
     session = require('express-session'),
-    express = require('express'),
+    express = require('express')
 
 
 // Testing requirements

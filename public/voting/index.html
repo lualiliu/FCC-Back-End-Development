@@ -23,9 +23,9 @@
     </head>
     <body>
         <div ng-app="votingModule">
-            <div ng-include="'login-strip.html'"></div>
+            <div ng-include="'voting/login-strip.html'"></div>
             <div ng-controller="MainController">
-                <div ng-show="hasPollSearch" ng-include="'poll-view.html'"></div>
+                <div ng-show="hasPollSearch" ng-include="'voting/poll-view.html'"></div>
                 <div id="loading" ng-show="!receivedLogin">
                     <!--h4>Loading, please wait...</h4-->
                 </div>
@@ -33,9 +33,9 @@
                     <!-- TODO Splash screen for users who are not logged in -->
                 </div>
                 <div id="logged" ng-show="isLogged">
-                    <div ng-include="'control-buttons.html'"></div>
-                    <div id="poll-form-panel" ng-include="'poll-form.html'"></div>
-                    <div id="my-polls-panel" ng-include="'my-polls.html'"></div>
+                    <div ng-include="'voting/control-buttons.html'"></div>
+                    <div id="poll-form-panel" ng-include="'voting/poll-form.html'"></div>
+                    <div id="my-polls-panel" ng-include="'voting/my-polls.html'"></div>
                 </div>
             </div>
         </div>

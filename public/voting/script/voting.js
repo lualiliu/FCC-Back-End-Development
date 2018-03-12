@@ -21,7 +21,7 @@
             var pollSearch = $location.search();
             $scope.hasPollSearch = !jQuery.isEmptyObject(pollSearch);
             if ($scope.hasPollSearch) {
-                jQuery.post("get-poll", pollSearch, function(data) {
+                jQuery.post("voting/get-poll", pollSearch, function(data) {
                     $scope.getPollMessageError = data.error;
                     $scope.getPollMessage = data.message;
                     if (!data.error) {
@@ -64,13 +64,13 @@
             }
         };
         $scope.addVote = function(index) {
-            jQuery.post("add-vote", {index: index, pollID: $scope.poll._id}, function(data) {
+            jQuery.post("voting/add-vote", {index: index, pollID: $scope.poll._id}, function(data) {
                 getPoll();
             });
         };
         $scope.submitNewOption = function(newOption) {
             $scope.newOption = {value: ''};
-            jQuery.post("add-option", {option: newOption, pollID: $scope.poll._id}, function(data) {
+            jQuery.post("voting/add-option", {option: newOption, pollID: $scope.poll._id}, function(data) {
                 getPoll();
             });
         }
@@ -87,7 +87,7 @@
         });
         // Function to retrieve "My Polls"
         var checkMyPolls = function() {
-            jQuery.post("my-polls", function(data) {
+            jQuery.post("voting/my-polls", function(data) {
                 $scope.MyPollsMessageError = data.error;
                 $scope.MyPollsMessage = data.message;
                 if (!data.error) {
@@ -102,7 +102,7 @@
         // Function to delete a poll from the "My Polls" list:
         $scope.deletePoll = function(id) {
             var idObject = {id: id};
-            jQuery.post("delete-poll", idObject, function(data) {
+            jQuery.post("voting/delete-poll", idObject, function(data) {
                 $scope.MyPollsMessageError = data.error;
                 $scope.MyPollsMessage = data.message;
                 if (!data.error) {
@@ -144,7 +144,7 @@
                 question: $scope.form.question,
                 options: JSON.stringify($scope.form.options)
             };
-            jQuery.post("new-poll", postObject, function(data) {
+            jQuery.post("voting/new-poll", postObject, function(data) {
                 if (data.message) {
                     $scope.messageError = data.error;
                     $scope.message = data.message;

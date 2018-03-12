@@ -3,7 +3,7 @@
     app.factory('loginStatus', function() {
         var service = {};
         service.getLogin = function() {
-            return jQuery.post("check", function(data) {
+            return jQuery.post("/voting/check", function(data) {
                 hasCheckedLogin = true;
                 service.data = username = data;
                 return service.data;
@@ -23,7 +23,7 @@
             var enteredUser = JSON.parse(JSON.stringify($scope.user));
             jQuery.post("register", enteredUser, function(data) {
                 if (data === true) {
-                    jQuery.post("login", enteredUser, function(data) {
+                    jQuery.post("/voting/login", enteredUser, function(data) {
                         window.location.href = "/";
                     });
                 } else {
@@ -57,7 +57,7 @@
         };
         $scope.message = "";
         $scope.login = function() {
-            jQuery.post("login", $scope.user, function(data) {
+            jQuery.post("/voting/login", $scope.user, function(data) {
                 $scope.user.password = '';
                 if (data.message) {
                     $scope.message = data.message;
