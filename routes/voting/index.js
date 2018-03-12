@@ -11,14 +11,14 @@ var PORT = process.env.PORT || 8080,
     bodyparser = require('body-parser'),
     session = require('express-session'),
     express = require('express'),
-    app = express();
+
 
 // Testing requirements
 var util = require('util');
+var router = express.Router();
 
-app.use(bodyparser.urlencoded({extended: false}));
-app.use(express.static('public'));
-app.use(session({
+router.use(bodyparser.urlencoded({extended: false}));
+router.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -26,10 +26,10 @@ app.use(session({
     },
     secret: SESSION_KEY
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+router.use(passport.initialize());
+router.use(passport.session());
 
-app.post('/register', function (req, res) {
+router.post('/register', function (req, res) {
     var user = req.body.username;
     var pass = req.body.password;
     var passRepeat = req.body.passwordRepeat;
@@ -86,7 +86,7 @@ app.post('/register', function (req, res) {
     });
 });
 
-app.post('/login', function (req, res) {
+router.post('/login', function (req, res) {
     passport.authenticate('local', function (err, user, info) {
         if (err) {
             res.status(500).send(err);
@@ -103,7 +103,7 @@ app.post('/login', function (req, res) {
     })(req, res);
 });
 
-app.post('/check', function (req, res) {
+router.post('/check', function (req, res) {
     if (req.user) {
         res.send(req.user.realname);
     } else {
@@ -111,7 +111,7 @@ app.post('/check', function (req, res) {
     }
 });
 
-app.post('/my-polls', function (req, res) {
+router.post('/my-polls', function (req, res) {
     if (req.user) {
         var userID = objectID(req.user._id);
         mongo.connect(URL, function(err, db) {
@@ -146,7 +146,7 @@ app.post('/my-polls', function (req, res) {
     }
 });
 
-app.post('/get-poll', function (req, res) {
+router.post('/get-poll', function (req, res) {
     var userID = req.user ? objectID(req.user._id) : false;
     if (req.body.poll) {
         try {
@@ -195,7 +195,7 @@ app.post('/get-poll', function (req, res) {
     }
 });
 
-app.post('/delete-poll', function (req, res) {
+router.post('/delete-poll', function (req, res) {
     if (req.user) {
         var userID = objectID(req.user._id);
         if (req.body.id) {
@@ -249,7 +249,7 @@ app.post('/delete-poll', function (req, res) {
     }
 });
 
-app.post('/new-poll', function (req, res) {
+router.post('/new-poll', function (req, res) {
     var questionString = req.body.question;
     if (questionString == ''){
         res.send({
@@ -312,7 +312,7 @@ app.post('/new-poll', function (req, res) {
     }
 });
 
-app.post('/add-vote', function (req, res) {
+router.post('/add-vote', function (req, res) {
     var optionIndex = parseInt(req.body.index);
     var optionKey = 'options.' + req.body.index + '.voters';
     var pollID = objectID(req.body.pollID);
@@ -330,7 +330,7 @@ app.post('/add-vote', function (req, res) {
     });
 });
 
-app.post('/add-option', function (req, res) {
+router.post('/add-option', function (req, res) {
     if (req.body.option) {
         var optionKey = 'options';
         var pollID = objectID(req.body.pollID);
@@ -352,7 +352,7 @@ app.post('/add-option', function (req, res) {
     } else {res.end()}
 });
 
-app.post('/logout', function (req, res) {
+router.post('/logout', function (req, res) {
     req.logout();
     res.send('Logout');
 });
@@ -406,4 +406,4 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-app.listen(PORT);
+module.exports = router;

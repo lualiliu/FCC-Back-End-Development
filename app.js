@@ -8,6 +8,7 @@ var headerparser = require('./routes/headerparser/index');
 var shortener = require('./routes/shortener/index');
 var imagesearch = require('./routes/imagesearch/index');
 var filemetadata = require('./routes/filemetadata/index');
+var voting = require('./routes/voting/index');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use('/api/shortener', shortener);
 app.use('/api/imagesearch', imagesearch);
 app.use('/api/filemetadata', filemetadata);
 
+app.use('/voting', voting);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
