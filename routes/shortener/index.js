@@ -5,6 +5,10 @@ var router = express.Router();
 let count = 0;
 let urls = {};
 
+router.get('/', function(req, res) {
+  res.sendFile( __dirname + "/" + "index.html" );
+});
+
 router.get('/new/:id', (req,res)=>{
   let obj = shorten('http://', req.params.id, req.hostname);
   res.send(JSON.stringify(obj));
