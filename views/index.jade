@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	div#container
+	hr
+	div.container
+		div.form-add.form-inline
+			input#stockname.form-control(placeholder="Stock code")
+			button.btn.btn-primary Add
+		hr
+		div#item
+	script(src="/stockmarket/third-party/highstock/js/highstock.js")
+	script(src="/socket.io/socket.io.js")
+	script(src="/stockmarket/javascripts/index.js")
